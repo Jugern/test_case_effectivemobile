@@ -69,13 +69,10 @@ class Phonebook:
 
     def redactirovat(self, page_size: int = 10) -> None:
         """
-        Редактирует записи в телефонной книге.
+        Просматривает и редактирует записи в телефонной книге.
 
         Args:
             page_size (int): Размер страницы при пагинации.
-
-        Returns:
-            None
 
         Raises:
             ValueError: Если введено некорректное значение номера страницы или строки для редактирования.
@@ -86,6 +83,13 @@ class Phonebook:
 
         total_records: int = len(self.records)  # количество записей в б.д.
         total_pages: int = (total_records + page_size - 1) // page_size  # количество страниц
+        total_field: Dict[str] = {'last_name': 'Фамилию',
+                                  'first_name': 'Имя',
+                                  'otchestvo': 'Отчество',
+                                  'organization': 'Организацию',
+                                  'work_phone': 'Рабочий телефон',
+                                  'personal_phone': 'Персональный телефон',
+                                  }
 
         while True:
             try:
@@ -110,7 +114,7 @@ class Phonebook:
                         new_data = {}
                         for field in self.record_class._fields:
                             znachenie = input(
-                                f"{field.replace('_', ' ').title()} - сейчас: {getattr(selected_record, field)} ")
+                                f"Введите {total_field[field]} - сейчас: {getattr(selected_record, field)} ")
                             if znachenie:
                                 new_data[field] = znachenie
                         for field, value in new_data.items():
