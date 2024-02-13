@@ -240,6 +240,8 @@ while True:
             print("Результаты поиска:")
             for record in results:
                 print(record)
+            print("-" * 30)
+            print(input('Нажмите Enter для продолжения'))
         else:
             print("Запись не найдена")
 
